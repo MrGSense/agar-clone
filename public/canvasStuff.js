@@ -3,12 +3,22 @@ function init() {
 }
 
 // Drawing
-let randomX = Math.floor(500 * Math.random() + 10);
-let randomY = Math.floor(500 * Math.random() + 10);
+player.locX = Math.floor(500 * Math.random() + 10);
+player.locY = Math.floor(500 * Math.random() + 10);
+
 function draw() {
+  // Clear screen so last frame player is gone
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.setTransform(1, 0, 0, 1, 0, 0);
+
+  // Put camera on the player
+  const camX = -player.locX + canvas.width / 2;
+  const camY = -player.locY + canvas.height / 2;
+  context.translate(camX, camY);
+
   context.beginPath();
   context.fillStyle = "rgb(255, 0, 0)";
-  context.arc(randomX, randomY, 10, 0, 2 * Math.PI);
+  context.arc(player.locX, player.locY, 10, 0, 2 * Math.PI);
   context.fill();
   context.lineWidth = 3;
   context.strokeStyle = "rgb(0, 255, 0)";
