@@ -6,3 +6,8 @@ const expressServer = app.listen(8080);
 const io = socketio(expressServer);
 const helmet = require("helmet");
 app.use(helmet());
+
+module.exports = {
+  app,
+  io
+};
