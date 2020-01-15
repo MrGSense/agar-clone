@@ -8,8 +8,8 @@ player.locY = Math.floor(500 * Math.random() + 10);
 
 function draw() {
   // Clear screen so last frame player is gone
-  context.clearRect(0, 0, canvas.width, canvas.height);
   context.setTransform(1, 0, 0, 1, 0, 0);
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
   // Put camera on the player
   const camX = -player.locX + canvas.width / 2;
@@ -23,6 +23,14 @@ function draw() {
   context.lineWidth = 3;
   context.strokeStyle = "rgb(0, 255, 0)";
   context.stroke();
+
+  orbs.forEach(orb => {
+    context.beginPath();
+    context.fillStyle = orb.color;
+    context.arc(orb.locX, orb.locY, orb.radius, 0, 2 * Math.PI);
+    context.fill();
+  });
+
   requestAnimationFrame(draw);
 }
 
