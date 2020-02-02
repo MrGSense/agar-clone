@@ -15,3 +15,5 @@ class PlayerData {
     return `rgb(${r}, ${g}, ${b})`;
   }
 }
+
+module.exports = PlayerData;
