@@ -1,4 +1,7 @@
 const io = require("../server").io;
+const checkForOrbCollisions = require("./checkCollision").checkForOrbCollisions;
+const checkForPlayerCollisions = require("./checkCollision")
+  .checkForPlayerCollisions;
 
 // Classes
 const Orb = require("./classes/Orb");
