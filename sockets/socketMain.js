@@ -123,6 +123,8 @@ io.sockets.on("connect", socket => {
     players.forEach((curPlayer, i) => {
       if (curPlayer.uid == player.playerData.uid) {
         player.splice(i, 1);
+
+        io.sockets.emit("updateLeaderBoard", getLeaderBoard());
       }
     });
   });
