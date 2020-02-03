@@ -4,8 +4,6 @@ function draw() {
   context.setTransform(1, 0, 0, 1, 0, 0);
   context.clearRect(0, 0, canvas.width, canvas.height);
 
-  console.log(player.locX, player.locY);
-
   // Put camera on the player
   const camX = -player.locX + canvas.width / 2;
   const camY = -player.locY + canvas.height / 2;
@@ -14,7 +12,7 @@ function draw() {
   players.forEach(p => {
     context.beginPath();
     context.fillStyle = p.color;
-    context.arc(p.locX, p.locY, 10, 0, 2 * Math.PI);
+    context.arc(p.locX, p.locY, p.radius, 0, 2 * Math.PI);
     context.fill();
     context.lineWidth = 3;
     context.strokeStyle = p.color;

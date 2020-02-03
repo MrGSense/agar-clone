@@ -12,12 +12,12 @@ const PlayerConfig = require("./classes/PlayerConfig");
 let orbs = [];
 let players = [];
 let settings = {
-  defaultOrbs: 500,
+  defaultOrbs: 5000,
   defaultSpeed: 6,
-  defaultSize: 6,
+  defaultSize: 10,
   defaultZoom: 1.5,
-  worldWidth: 500,
-  worldHeight: 500
+  worldWidth: 5000,
+  worldHeight: 5000
 };
 
 initGame();
@@ -47,6 +47,7 @@ io.sockets.on("connect", socket => {
   });
 
   socket.on("tick", data => {
+    // Movement
     speed = player.playerConfig.speed;
     xV = player.playerConfig.xVector = data.xVector;
     yV = player.playerConfig.yVector = data.yVector;
@@ -65,6 +66,27 @@ io.sockets.on("connect", socket => {
       player.playerData.locX += speed * xV;
       player.playerData.locY -= speed * yV;
     }
+
+    // Collisions
+    let capturedOrb = checkForOrbCollisions(
+      player.playerData,
+      player.playerConfig,
+      orbs,
+      settings
+    );
+
+    capturedOrb
+      .then(data => {
+        // console.log(`Orb collision at ${data}`);
+        const orbData = {
+          orbIndex: data,
+          newOrb: orbs[data]
+        };
+        io.sockets.emit("orbSwitch", orbData);
+      })
+      .catch(() => {
+        // console.log("No orb collision");
+      });
   });
 });
 
