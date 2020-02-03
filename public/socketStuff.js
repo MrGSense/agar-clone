@@ -20,4 +20,6 @@ socket.on("initReturn", data => {
 
 socket.on("tock", data => {
   players = data.players;
+  player.locX = data.playerX;
+  player.locY = data.playerY;
 });

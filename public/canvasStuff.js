@@ -4,6 +4,8 @@ function draw() {
   context.setTransform(1, 0, 0, 1, 0, 0);
   context.clearRect(0, 0, canvas.width, canvas.height);
 
+  console.log(player.locX, player.locY);
+
   // Put camera on the player
   const camX = -player.locX + canvas.width / 2;
   const camY = -player.locY + canvas.height / 2;

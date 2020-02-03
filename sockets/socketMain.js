@@ -19,12 +19,6 @@ let settings = {
 
 initGame();
 
-setInterval(() => {
-  io.to("game").emit("tock", {
-    players
-  });
-}, 33); // Refresh every 1/30th of a second for 30 FPS
-
 io.sockets.on("connect", socket => {
   let player = {};
 
@@ -32,8 +26,16 @@ io.sockets.on("connect", socket => {
     socket.join("game");
 
     let playerConfig = new PlayerConfig(settings);
-    let playerData = new PlayerData(null, settings);
+    let playerData = new PlayerData(data.playerName, settings);
     player = new Player(socket.id, playerConfig, playerData);
+
+    setInterval(() => {
+      io.to("game").emit("tock", {
+        players,
+        playerX: player.playerData.locX,
+        playerY: player.playerData.locY
+      });
+    }, 33); // Refresh every 1/30th of a second for 30 FPS
 
     socket.emit("initReturn", {
       orbs
