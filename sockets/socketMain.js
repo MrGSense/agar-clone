@@ -117,7 +117,15 @@ io.sockets.on("connect", socket => {
         // console.log("No player collision");
       });
   });
-  socket.on("disconnect", data => {});
+  socket.on("disconnect", data => {
+    // console.log(data);
+
+    players.forEach((curPlayer, i) => {
+      if (curPlayer.uid == player.playerData.uid) {
+        player.splice(i, 1);
+      }
+    });
+  });
 });
 
 function getLeaderBoard() {
