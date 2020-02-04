@@ -4,6 +4,7 @@
   "description": "Agar.io clone made using Socket.io",
   "main": "server.js",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "author": "Kyle Fetterhoff",
@@ -13,5 +14,8 @@
     "helmet": "^3.21.2",
     "socket.io": "^2.3.0",
     "uuid": "^3.4.0"
+  },
+  "engines": {
+    "npm": "6.x"
   }
 }
