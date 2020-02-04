@@ -1,4 +1,4 @@
-let socket = io.connect("http://localhost:8080");
+let socket = io.connect(window.location.hostname);
 
 function init() {
   draw();
