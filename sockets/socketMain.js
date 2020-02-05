@@ -1,20 +1,21 @@
 const io = require("../server").io;
-const checkForOrbCollisions = require("./checkCollision").checkForOrbCollisions;
-const checkForPlayerCollisions = require("./checkCollision")
+const checkForOrbCollisions = require("./checkCollisions")
+  .checkForOrbCollisions;
+const checkForPlayerCollisions = require("./checkCollisions")
   .checkForPlayerCollisions;
 
 // Classes
-const Orb = require("./classes/Orb");
 const Player = require("./classes/Player");
 const PlayerData = require("./classes/PlayerData");
 const PlayerConfig = require("./classes/PlayerConfig");
+const Orb = require("./classes/Orb");
 
 let orbs = [];
 let players = [];
 let settings = {
   defaultOrbs: 5000,
-  defaultSpeed: 6,
-  defaultSize: 6,
+  defaultSpeed: 10,
+  defaultSize: 10,
   defaultZoom: 1.5,
   worldWidth: 5000,
   worldHeight: 5000
@@ -50,6 +51,7 @@ io.sockets.on("connect", socket => {
     socket.emit("initReturn", {
       orbs
     });
+
     players.push(playerData);
   });
 
@@ -117,6 +119,7 @@ io.sockets.on("connect", socket => {
         // console.log("No player collision");
       });
   });
+
   socket.on("disconnect", data => {
     // console.log(data);
 
